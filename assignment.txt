@@ -1,0 +1,16 @@
+import cv2
+import math
+img = cv2.imread("lena.jpg", cv2.IMREAD_GRAYSCALE)
+cv2.imshow("lena",img)
+b=1 
+outputimg=img.copy()
+for c in range(8):
+    for i in range(outputimg.shape[0]):
+        for j in range(outputimg.shape[1]):
+            val=img.item(i,j)
+            outputimg.itemset((i,j),val&b)
+    cv2.imshow("Bit slice : "+str(c), outputimg)
+    cv2.waitKey(100)
+    b=b<<1
+cv2.waitKey(0)
+cv2.destroyAllWindows()
