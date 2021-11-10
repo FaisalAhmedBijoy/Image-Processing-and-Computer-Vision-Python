@@ -30,22 +30,33 @@ img[img<tr] = 0
 cv2.imshow("binary", img)
 cv2.waitKey(0)
 
-element = np.array([[1, 1, 1],
+kernel = np.array([[1, 1, 1],
            [1, 1, 1],
            [1, 1, 1]])
 
-dil = cv2.dilate(img, element)
+dil = cv2.dilate(img, kernel)
 cv2.imshow("dilated", dil)
 cv2.waitKey(0)
 
 cv2.imshow("dilated_boundary", dil-img)
 cv2.waitKey(0)
 
-er = cv2.erode(img, element)
+er = cv2.erode(img, kernel)
 cv2.imshow("eroded", er)
 cv2.waitKey(0)
 
 cv2.imshow("eroded_boundary", img-er)
+cv2.waitKey(0)
+
+
+# Opening - Good for removing noise
+opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+cv2.imshow('Opening', opening)
+cv2.waitKey(0) 
+
+# Closing - Good for removing noise
+closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+cv2.imshow('Closing', closing)
 cv2.waitKey(0)
 
 cv2.destroyAllWindows()
